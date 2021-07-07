@@ -1,4 +1,4 @@
-# If you want to build bot just to send alerts from Zabbix, [read this](https://github.com/who0ps/build-a-bot-with-zero-coding/blob/master/README-ZBX.md).
+# If you want to build bot just to send alerts from Zabbix, [read this](README-ZBX.md).
 
 # Build a Bot with Zero Coding
 
@@ -24,7 +24,7 @@ Google Apps Script is a JavaScript-based scripting language that lets you add fu
 
 ## How?
 
-### 1. Download the "SurveyChatBot.xlsx", the "keyboardGenerator.gs" and the "script.gs" from this repo.
+### 1. Download [SurveyChatBot](SurveyChatBot.xlsx), [keyboardGenerator](keyboardGenerator.gs) and [script](script.gs).
 
 ### 2. Upload or import spreadsheet (SurveyChatBot.xlsx) to [Google Docs](https://sheet.new).
 
