@@ -1,3 +1,5 @@
+# If you want to build bot just to send alerts from Zabbix, [read this](https://github.com/who0ps/build-a-bot-with-zero-coding/blob/master/README-ZBX.md).
+
 # Build a Bot with Zero Coding
 
 Most bot tutorials are for people who can code, so if you don’t have developers or staff with extra time on their hands your custom needs may not be met. Building a bot requires technical resources, such as servers to run the logic, storage to store data points and developers, well, to code. Until now. In this tutorial, we’ll show how you can build a survey bot right from a Google Sheet.
@@ -17,28 +19,18 @@ Google Apps Script is a JavaScript-based scripting language that lets you add fu
 - Interact with other Google services, including AdSense, Analytics, Calendar, Drive, Gmail and Maps
 
 ## Prerequisites
-- Have a <a href="https://accounts.google.com/" target="_blank">Google Account</a>
-- <a href="https://developers.viber.com" target="_blank">Get your Viber Account authentication token</a> 
+- Have a [Google Account](https://accounts.google.com)
+- [Get your Viber Account authentication token](https://partners.viber.com/account/create-bot-account) 
 
 ## How?
 
-### 1. Make a copy of the spreadsheet
+### 1. Download the "SurveyChatBot.xlsx", the "keyboardGenerator.gs" and the "script.gs" from this repo.
 
->  <a href="https://docs.google.com/spreadsheets/d/187abmrkYlgoDZrYPChgQZiG2btfi98YPWrYYMF42UpQ/edit?usp=sharing" target="_blank">https://docs.google.com/spreadsheets/d/187abmrkYlgoDZrYPChgQZiG2btfi98YPWrYYMF42UpQ/edit?usp=sharing</a>
+### 2. Upload or import spreadsheet (SurveyChatBot.xlsx) to [Google Docs](https://sheet.new).
 
-In Google Sheets, Click **`File`** > **`Make a copy`**...
+### 3. Under the **`parameters`** sheet, edit the following fields:
 
-![make-copy](https://github.com/devrelv/blog/blob/master/google_sheet_make_copy.jpg?raw=true)
-
-This should give you something like this:
-
-![copy-of-sheet](https://github.com/devrelv/blog/blob/master/google_sheet_edit_copy_name.jpg?raw=true)
-
-> **Note:** Feel free to change the name of the `Copy` to anything you want, it will not affect the outcome.
-
-### 2. Under the **`parameters`** sheet, edit the following fields:
-
-- Access Token - Use the <a href="https://developers.viber.com/docs/faq/#authentication-tokens/" target="_blank">Access Token</a> which you got during the Account creation.
+- Access Token - Use the [Access Token](https://developers.viber.com/docs/faq/#authentication-tokens) which you got during the Public [Account creation](https://partners.viber.com/account/create-bot-account).
 - Bot Name - Be creative!
 - Bot Avatar URL - URL of the survey avatar. Avatar size should be no more than 100 kb. Recommended 720x720
 - Welcome to survey message - This is the welcome message which the user will receive from the survey bot
@@ -46,31 +38,27 @@ This should give you something like this:
 - End survey message - This is the message the bot will send at the end of the survey. It is generally a “Thank you” message
 - Do not understand message - This message will be sent if the user enters invalid input (a picture, sticker, etc.)
 - Should keyboard use random colors - Should the bot use random colors for different survey answer options or not. Acceptable values are `true` or `false`
-- Default keyboard option color - In case you choose not to use random color, you can set the default color here. Please use `Color Hex` <a href="http://www.color-hex.com//" target="_blank">format</a> only. For example `#999999`
-
-![parameters-sheet](https://github.com/devrelv/blog/blob/master/google_sheet_parameters_edit.jpg?raw=true)
+- Default keyboard option color - In case you choose not to use random color, you can set the default color here. Please use `Color Hex` [format](http://www.color-hex.com//") only. For example `#999999`
 
 This is the difference between a keyboard with specific colors versus one generated with random colors:
 
-![parameters-sheet](https://github.com/devrelv/blog/blob/master/google_sheet_solid_to_random.png?raw=true)
+![diffs](https://user-images.githubusercontent.com/17404606/124808509-b2d71e00-df67-11eb-9858-10f6d03d083f.png)
 
-
-### 3. Under the **`questions`** sheet, edit your questions:
+### 4. Under the **`questions`** sheet, edit your questions:
 
 #### Question types
 Our survey bot supports three (3) different types of questions: `range`, `keyboard` and `text`:
 
 - `range` -  Asks the user to enter a valid value from a custom range. It makes sense to provide a range when the user needs to score something.
 
-	![range-type-questions-sheet](https://github.com/devrelv/blog/blob/master/google_sheet_questions_example_range.jpg?raw=true)
-
+	![range](https://user-images.githubusercontent.com/17404606/124808598-cda99280-df67-11eb-9201-f201ada09452.png)
 - `keyboard` - Show case different selection options via the Viber's keyboard.
 
-	![keyboard-type-questions-sheet](https://github.com/devrelv/blog/blob/master/google_sheet_questions_example_keyboard.jpg?raw=true)
+	![keyboard](https://user-images.githubusercontent.com/17404606/124808710-edd95180-df67-11eb-88a1-7aaeb2048fdc.png)
 
 - `text` - Free text input.
 
-	![text-type-questions-sheet](https://github.com/devrelv/blog/blob/master/google_sheet_questions_example_text.jpg?raw=true)
+	![text](https://user-images.githubusercontent.com/17404606/124808794-0d707a00-df68-11eb-9959-a552bda0f96a.png)
 
 
 #### Editing questions
@@ -82,59 +70,71 @@ Each row in the spreadsheet equals to a survey question and ordered by sequence.
 - Under the `question` column write your question. Best practice is to mention the actual valid range.
 - Under the `extras` column write the acceptable values, separated by semicolons. For example `0;1;2;3`.
 
-	![range-type-questions-sheet](https://github.com/devrelv/blog/blob/master/google_sheet_questions_range.jpg?raw=true)
-
 **Adding a `keyboard` question**
 
 - Under the `type` column write `keyboard`
 - Under the `question` column write your question.
 - Under the `extras` column write the options, separated by semicolons. For example `Yes;No`.
 
-	![keyboard-type-questions-sheet](https://github.com/devrelv/blog/blob/master/google_sheet_questions_keyboard.jpg?raw=true)
-
 **Adding a `text` question**
 
 - Under the `type` column write `text`
 - Under the `question` column write your question.
 
-	![text-type-questions-sheet](https://github.com/devrelv/blog/blob/master/google_sheet_questions_text.jpg?raw=true)
+### 5. Open the Script Editor
 
-### 4. Open the Script Editor
+Open the **`Tools`** > **`<> Script editor`**
 
-Open the **`Script editor...`** by clicking "**`Tools`**" > "**`Script editor...`**"
+### 6. Upload .gs files.
 
-![script-editor](https://github.com/devrelv/blog/blob/master/google_sheet_open_script_editor.jpg?raw=true)
+a) Copy content of files and paste to new script. Rename. Create new **`+`** > **`Script`**. Repeat for another .gs file.
 
-### 5. Publish the script as a Web App
+OR
 
-![publish-script](https://github.com/devrelv/blog/blob/master/google_sheet_publish_web_app.jpg?raw=true)
+b) Swtich to legacy mode and drug&drop file to editor (make sure you deleted default "function myFunction() {    }".  Repeat for another file.
 
-Select the *latest* project version to deploy.
+### 7. Publish the script as a Web App
 
-> **Note:** You **must** select the `Anyone, even anonymous` option for the "Who has access to the app" dropdown or form responses will not be added to the spreadsheet!
+![deploy](https://user-images.githubusercontent.com/17404606/124802649-e06c9900-df60-11eb-98c7-8882a40fcfe9.png)
 
-![deploy-new-version](https://github.com/devrelv/blog/blob/master/google_sheet_deploy_web_app.jpg?raw=true)
+![type](https://user-images.githubusercontent.com/17404606/124802762-fd08d100-df60-11eb-8755-951c965e5ede.png)
 
-### 6. Authorize the script to access your Google Sheet data on Google
+> **Note:** You **must** select the `Anyone` option for the "Who has access" dropdown or form responses will not be added to the spreadsheet!
 
-![auth-required](https://github.com/devrelv/blog/blob/master/google_sheet_deploy_auth.jpg?raw=true)
+### 8. Authorize the script to access your Google Sheet data on Google - Click **`Authorize access`**
 
-**Copy** the web app URL to your clipboard / note pad.
-Then Click "OK".
+Then under **`advanced`** click **`Go to...`**
 
-![deploy-as-web-app](https://github.com/devrelv/blog/blob/master/google_sheet_deploy_url.jpg?raw=true)
+![secure](https://user-images.githubusercontent.com/17404606/124810403-f599f580-df69-11eb-9d8c-5e1cb56c92b1.png)
 
-### 7. Set the WebHook on Viber
+And **`Allow`**:
 
-<a href="https://viber-api-console.herokuapp.com/" target="_blank">Viber chat API console</a> is a helper site set up for this integration, specifically to help you set up a WebHook. This way Viber will know to communicate with your Sheet.
+![allow](https://user-images.githubusercontent.com/17404606/124810777-680ad580-df6a-11eb-8b6b-07b9d042089c.png)
 
-Select the **`Set a WebHook`** operation, paste your web app URL from the previous step and click the **`Apply`** button to make the change.
+> \*You will get Security alert email from Google, but this is ok - its your own APP.
 
-![set-web-hook-console](https://github.com/devrelv/blog/blob/master/google_sheet_console.jpg?raw=true)
+**`Copy`** the web app URL to your clipboard / note pad.
+Then Click **`Done`**.
 
-**Done**. That's it. You just created your very own survey chat bot! Your survey answers will populate on the **`answers`** sheet.
+![copy](https://user-images.githubusercontent.com/17404606/124811072-bd46e700-df6a-11eb-8f60-b3055d703467.png)
 
-![deploy-as-web-app](https://github.com/devrelv/blog/blob/master/google_sheet_answers.jpg?raw=true)
+### 9. Set the WebHook on Viber
+You need to send POST request to Viber API.
+
+a) In Linux: 
+``curl -s -X post https://chatapi.viber.com/pa/set_webhook -d '{"auth_token":"paste-your-token","url":"paste-your-web-app-URL-from-the-previous-step"}'``
+
+b) In Windows: **`Win+R`**, *cmd*:
+`curl -s -X post https://chatapi.viber.com/pa/set_webhook -d "{\"auth_token\":\"paste-your-token\",\"url\":\"paste-your-web-app-URL-from-the-previous-step\"}"`
+
+c) In Firefox: **`F12`**, **`Network`**, go to [this page](https://chatapi.viber.com/pa/set_webhook), select request with file "set_webhook", **`edit and send again`**, type *POST* as method, delete headers, put this in text: `{"auth_token":"paste-your-token","url":"paste-your-web-app-URL-from-the-previous-step"}` and **`send`**. Check new request > **`reply`**. 
+
+If you get "ok" - **Done**. That's it. You just created your very own survey chat bot! Your survey answers will populate on the **`answers`** sheet.
+If not "ok" - see [Error codes](https://developers.viber.com/docs/api/rest-bot-api/#error-codes).
+
+![done](https://user-images.githubusercontent.com/17404606/124811565-44945a80-df6b-11eb-902f-9686a89125d6.png)
+
+### If you want new bot on same accounts - open spreadsheet at Google docs. Click **`File`** > **`Make a copy`** and do steps: 3,4,5,7,8,9.
 
 ## Want more?
 Feel free to customize the code, add more question types, improve the flow or even accept pictures as valid input!
@@ -144,6 +144,5 @@ If you find any issues with this sample, please open an [issue on GitHub](https:
 
 ## Background reading
 
-+ <a href="https://developers.google.com/apps-script" target="_blank">Google Apps Scripts Basics</a>
-+ <a href="https://developers.google.com/apps-script/articles/mail_merge" target="_blank">Simple Mail Merge using Google Sheets</a>
-
++ [Google Apps Scripts Basics](https://developers.google.com/apps-script)
++ [Simple Mail Merge using Google Sheets](https://developers.google.com/apps-script/articles/mail_merge)
