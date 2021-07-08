@@ -1,6 +1,6 @@
 ## Prerequisites
 - Have a [Google Account](https://accounts.google.com)
-- [Get your Viber Account authentication token](https://partners.viber.com/account/create-bot-account) 
+- [Get your Viber Account authentication token](https://partners.viber.com/account/create-bot-account) (you also need Viber account to get one-time code).
 
 ### 1. Download [SurveyChatBot](SurveyChatBot.xlsx), [keyboardGenerator](keyboardGenerator.gs) and [script](script.gs).
 
