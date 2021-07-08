@@ -45,20 +45,20 @@ b) In Windows:
 
 c) In Firefox: **`F12`**, **`Network`**, go to [this page](https://chatapi.viber.com/pa/set_webhook), select request with file "set_webhook", **`edit and send again`**, type *POST* as method, delete headers, put this in text: `{"auth_token":"paste-your-token","url":"paste-your-web-app-URL-from-the-previous-step"}` and **`send`**. Check new request > **`reply`**. 
 
-If "ok" - share bot & collect user ids.
+If "ok" - share bot with users & collect user ids.
 If not "ok" - see [Error codes](https://developers.viber.com/docs/api/rest-bot-api/#error-codes).
 
-### 10. Download [Viber.sh](Viber.sh) on zabbix server. //not ready
+### 10. Download [Viber.sh](Viber.sh) on zabbix server.
 Move it to `/usr/local/share/zabbix/alertscripts` (default, may be defined at `zabbix_server.conf`).
 
 Make executeble: `chmod +x /usr/local/share/zabbix/alertscripts/Viber.sh`
 
-You can test it by executing: `/usr/local/share/zabbix/alertscripts/Viber.sh viberid test test your-auth-token`
+You can test it by executing: `/usr/local/share/zabbix/alertscripts/Viber.sh your-auth-token viberid test-subj test-mess`
 
-### 11. Download [media_viber](media_viber.xml). //not ready
+### 11. Download [media_viber](media_viber.xml).
 Go to **`Administration`** > **`Media types`**, and import .xml.
 
-Script parameters:
-{ALERT.SENDTO}, {ALERT.SUBJECT}, {ALERT.MESSAGE} and your-auth-token.
+Script parameters: paste your token.
 
-### 12. Go to **`Administration`** > **`Users`** and under media paste viber id from spreadsheet.  
+### 12. Go to **`Administration`** > **`Users`** and under **`Media`** tab in some User paste viber id from spreadsheet.  
+> **Note:** You may have to check **`Actions menu`**, so **`Report problems`** sends via _all media_ / _Viber_.
