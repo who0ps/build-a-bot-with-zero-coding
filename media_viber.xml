@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2021-07-08T10:55:56Z</date>
+    <media_types>
+        <media_type>
+            <name>Viber-alerts</name>
+            <type>SCRIPT</type>
+            <script_name>Viber.sh</script_name>
+            <parameters>
+                <parameter>your-auth-token</parameter>
+                <parameter>{ALERT.SENDTO}</parameter>
+                <parameter>{ALERT.SUBJECT}</parameter>
+                <parameter>{ALERT.MESSAGE}</parameter>
+            </parameters>
+            <attempts>10</attempts>
+            <attempt_interval>15s</attempt_interval>
+            <message_templates>
+                <message_template>
+                    <event_source>TRIGGERS</event_source>
+                    <operation_mode>PROBLEM</operation_mode>
+                    <subject>`{HOST.NAME}` {EVENT.NAME}</subject>
+                    <message>❌Problem started at {EVENT.TIME} on {EVENT.DATE}&#13;
+Operational data: {EVENT.OPDATA}</message>
+                </message_template>
+                <message_template>
+                    <event_source>TRIGGERS</event_source>
+                    <operation_mode>RECOVERY</operation_mode>
+                    <subject>`{HOST.NAME}` {EVENT.RECOVERY.NAME} - resolved in {EVENT.DURATION}</subject>
+                    <message>✅Problem started at {EVENT.TIME} on {EVENT.DATE} and resolved at {EVENT.RECOVERY.TIME} on {EVENT.RECOVERY.DATE}&#13;
+Operational data: {EVENT.OPDATA}</message>
+                </message_template>
+                <message_template>
+                    <event_source>TRIGGERS</event_source>
+                    <operation_mode>UPDATE</operation_mode>
+                    <subject>`{HOST.NAME}` {EVENT.NAME}</subject>
+                    <message>☑️{USER.FULLNAME} {EVENT.UPDATE.ACTION} problem at {EVENT.UPDATE.DATE} {EVENT.UPDATE.TIME}.&#13;
+_{EVENT.UPDATE.MESSAGE}_&#13;
+&#13;
+Current problem status is {EVENT.STATUS}, acknowledged: {EVENT.ACK.STATUS}.</message>
+                </message_template>
+                <message_template>
+                    <event_source>DISCOVERY</event_source>
+                    <operation_mode>PROBLEM</operation_mode>
+                    <subject>Discovery: {DISCOVERY.DEVICE.STATUS} {DISCOVERY.DEVICE.IPADDRESS}</subject>
+                    <message>Discovery rule: {DISCOVERY.RULE.NAME}&#13;
+&#13;
+Device IP: {DISCOVERY.DEVICE.IPADDRESS}&#13;
+Device DNS: {DISCOVERY.DEVICE.DNS}&#13;
+Device status: {DISCOVERY.DEVICE.STATUS}&#13;
+Device uptime: {DISCOVERY.DEVICE.UPTIME}&#13;
+&#13;
+Device service name: {DISCOVERY.SERVICE.NAME}&#13;
+Device service port: {DISCOVERY.SERVICE.PORT}&#13;
+Device service status: {DISCOVERY.SERVICE.STATUS}&#13;
+Device service uptime: {DISCOVERY.SERVICE.UPTIME}</message>
+                </message_template>
+                <message_template>
+                    <event_source>AUTOREGISTRATION</event_source>
+                    <operation_mode>PROBLEM</operation_mode>
+                    <subject>Autoregistration: {HOST.HOST}</subject>
+                    <message>Host name: {HOST.HOST}&#13;
+Host IP: {HOST.IP}&#13;
+Agent port: {HOST.PORT}</message>
+                </message_template>
+                <message_template>
+                    <event_source>INTERNAL</event_source>
+                    <operation_mode>PROBLEM</operation_mode>
+                    <subject>State: {ITEM.STATE}</subject>
+                    <message>Host: {HOST.NAME}&#13;
+Item: {ITEM.NAME}</message>
+                </message_template>
+                <message_template>
+                    <event_source>INTERNAL</event_source>
+                    <operation_mode>RECOVERY</operation_mode>
+                    <subject>State: {ITEM.STATE}</subject>
+                    <message>Host: {HOST.NAME}&#13;
+Item: {ITEM.NAME}</message>
+                </message_template>
+            </message_templates>
+        </media_type>
+    </media_types>
+</zabbix_export>
