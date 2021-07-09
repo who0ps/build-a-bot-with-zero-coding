@@ -140,7 +140,7 @@ If not "ok" - see [Error codes](https://developers.viber.com/docs/api/rest-bot-a
 Feel free to customize the code, add more question types, improve the flow or even accept pictures as valid input!
 
 ## How to report bugs
-If you find any issues with this sample, please open an [issue on GitHub](https://github.com/Viber/build-a-bot-with-zero-coding/issues/new).
+If you find any issues with this sample, please open an [issue on GitHub](https://github.com/who0ps/build-a-bot-with-zero-coding/issues/new) or [to original repo](https://github.com/Viber/build-a-bot-with-zero-coding/issues/new).
 
 ## Background reading
 
