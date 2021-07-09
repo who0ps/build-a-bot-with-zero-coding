@@ -48,17 +48,21 @@ c) In Firefox: **`F12`**, **`Network`**, go to [this page](https://chatapi.viber
 If "ok" - share bot with users & collect user ids.
 If not "ok" - see [Error codes](https://developers.viber.com/docs/api/rest-bot-api/#error-codes).
 
-### 10. Download [Viber.sh](Viber.sh) on zabbix server.
-Move it to `/usr/local/share/zabbix/alertscripts` (default, may be defined at `zabbix_server.conf`).
-
-Make executeble: `chmod +x /usr/local/share/zabbix/alertscripts/Viber.sh`
-
-You can test it by executing: `/usr/local/share/zabbix/alertscripts/Viber.sh your-auth-token viberid test-subj test-mess`
-
-### 11. Download [media_viber](media_viber.xml).
+### 10. Download [media_viber](media_viber.xml).
 Go to **`Administration`** > **`Media types`**, and import .xml.
 
 Script parameters: paste your token.
 
-### 12. Go to **`Administration`** > **`Users`** and under **`Media`** tab in some User paste viber id from spreadsheet.  
+   ### 10b. For legacy zabbix (<4.4.4) - download [Viber.sh](Viber.sh) on zabbix server.
+   
+   Move it to `/usr/local/share/zabbix/alertscripts` (default, may be defined at `zabbix_server.conf`).
+  
+   Make executeble: `chmod +x /usr/local/share/zabbix/alertscripts/Viber.sh` 
+
+   You can test it by executing: `/usr/local/share/zabbix/alertscripts/Viber.sh your-auth-token viberid test-subj test-mess`
+
+   Also you need to dowload [media_viber-legacy](media_viber-legacy.xml), go to **`Administration`** > **`Media types`**, and import .xml. 
+      > Limitations: you can't sent messages with symbols: **`'`**,**`!`**,**`"`**.
+
+### 11. Go to **`Administration`** > **`Users`** and under **`Media`** tab in some User paste viber id from spreadsheet.  
 > **Note:** You may have to check **`Actions menu`**, so **`Report problems`** sends via _all media_ / _Viber_.
