@@ -53,7 +53,7 @@ Go to **`Administration`** > **`Media types`**, and import .xml.
 
 Script parameters: paste your token.
 
-   ### 10b. For legacy zabbix (<4.4.4) - download [Viber.sh](Viber.sh) on zabbix server.
+   ### 10b. For legacy Zabbix (<4.4.4) - download [Viber.sh](Viber.sh) on zabbix server.
    
    Move it to `/usr/local/share/zabbix/alertscripts` (default, may be defined at `zabbix_server.conf`).
   
@@ -62,7 +62,7 @@ Script parameters: paste your token.
    You can test it by executing: `/usr/local/share/zabbix/alertscripts/Viber.sh your-auth-token viberid test-subj test-mess`
 
    Also you need to dowload [media_viber-legacy](media_viber-legacy.xml), go to **`Administration`** > **`Media types`**, and import .xml. 
-      > Limitations: you can't sent messages with symbols: **`'`**,**`!`**,**`"`**.
+   > Limitations: you can't sent messages with symbols: **`'`**,**`!`**,**`"`**.
 
 ### 11. Go to **`Administration`** > **`Users`** and under **`Media`** tab in some User paste viber id from spreadsheet.  
 > **Note:** You may have to check **`Actions menu`**, so **`Report problems`** sends via _all media_ / _Viber_.
